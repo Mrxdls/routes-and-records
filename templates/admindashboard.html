@@ -1,0 +1,235 @@
+<!-- templates/admin/dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <p>Manage your portfolio content</p>
+        <div class="admin-actions">
+            <!-- <a href="{{ url_for('admin_logout') }}" class="btn btn-secondary">Logout</a> -->
+        </div>
+    </div>
+</section>
+
+<section class="admin-section">
+    <div class="container">
+        <div class="admin-grid">
+            <div class="admin-sidebar">
+                <ul class="admin-menu">
+                    <li><a href="#projects" class="admin-menu-link active" data-section="projects">Projects</a></li>
+                    <li><a href="#skills" class="admin-menu-link" data-section="skills">Skills</a></li>
+                    <li><a href="#blogs" class="admin-menu-link" data-section="blogs">Blog Posts</a></li>
+                    <li><a href="#experience" class="admin-menu-link" data-section="experience">Experience</a></li>
+                    <li><a href="#education" class="admin-menu-link" data-section="education">Education</a></li>
+                    <li><a href="#achievements" class="admin-menu-link" data-section="achievements">Achievements</a></li>
+                </ul>
+            </div>
+            
+            <div class="admin-content">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-success">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                
+                <div id="projects" class="admin-panel active">
+                    <div class="panel-header">
+                        <h2>Manage Projects</h2>
+                        <button class="btn btn-primary add-new" data-form="project-form">Add New Project</button>
+                    </div>
+                    
+                    <div class="panel-content">
+                        <form id="project-form" class="admin-form" action="{{ url_for('admin_add_project') }}" method="POST" enctype="multipart/form-data" style="display: none;">
+                            <div class="form-group">
+                                <label for="project-title">Title</label>
+                                <input type="text" id="project-title" name="title" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-description">Description</label>
+                                <textarea id="project-description" name="description" rows="4" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-image">Image</label>
+                                <input type="file" id="project-image" name="image">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-link">GitHub Link</label>
+                                <input type="url" id="project-link" name="link">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-technologies">Technologies (comma separated)</label>
+                                <input type="text" id="project-technologies" name="technologies" placeholder="Flask, Python, SQLite">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Project</button>
+                                <button type="button" class="btn btn-secondary cancel-form">Cancel</button>
+                            </div>
+                        </form>
+                        
+                        <div class="items-list">
+                            {% for project in projects %}
+                            <div class="item-card">
+                                <div class="item-image">
+                                    <img src="{{ project.image }}" alt="{{ project.title }}">
+                                </div>
+                                <div class="item-details">
+                                    <h3>{{ project.title }}</h3>
+                                    <p>{{ project.description[:100] }}{% if project.description|length > 100 %}...{% endif %}</p>
+                                    <div class="item-actions">
+                                        <a href="{{ url_for('admin_edit_project', id=project.id) }}" class="btn btn-small">Edit</a>
+                                        <a href="{{ url_for('admin_delete_project', id=project.id) }}" class="btn btn-small btn-danger" onclick="return confirm('Are you sure you want to delete this project?')">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="skills" class="admin-panel">
+                    <div class="panel-header">
+                        <h2>Manage Skills</h2>
+                        <button class="btn btn-primary add-new" data-form="skill-form">Add New Skill</button>
+                    </div>
+                    
+                    <div class="panel-content">
+                        <form id="skill-form" class="admin-form" action="{{ url_for('admin_add_skill') }}" method="POST" style="display: none;">
+                            <div class="form-group">
+                                <label for="skill-name">Skill Name</label>
+                                <input type="text" id="skill-name" name="name" required>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Skill</button>
+                                <button type="button" class="btn btn-secondary cancel-form">Cancel</button>
+                            </div>
+                        </form>
+                        
+                        <div class="items-list skill-tags-list">
+                            {% for skill in skills %}
+                            <div class="skill-tag-item">
+                                <span class="skill-tag">{{ skill.name }}</span>
+                                <a href="{{ url_for('admin_delete_skill', id=skill.id) }}" class="skill-delete" onclick="return confirm('Are you sure?')">×</a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Similar panels for blogs, experience, education, and achievements -->
+                <div id="blogs" class="admin-panel">
+                    <div class="panel-header">
+                        <h2>Manage Blog Posts</h2>
+                        <button class="btn btn-primary add-new" data-form="blog-form">Add New Blog</button>
+                    </div>
+                    
+                    <div class="panel-content">
+                        <form id="blog-form" class="admin-form" action="{{ url_for('admin_add_blog') }}" method="POST" enctype="multipart/form-data" style="display: none;">
+                            <div class="form-group">
+                                <label for="blog-title">Title</label>
+                                <input type="text" id="blog-title" name="title" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="blog-preview">Preview</label>
+                                <textarea id="blog-preview" name="preview" rows="3" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="blog-image">Image</label>
+                                <input type="file" id="blog-image" name="image">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="blog-url">Blog URL</label>
+                                <input type="url" id="blog-url" name="url" placeholder="https://medium.com/your-blog-post">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Blog</button>
+                                <button type="button" class="btn btn-secondary cancel-form">Cancel</button>
+                            </div>
+                        </form>
+                        
+                        <!-- Blog list would go here -->
+                        <div class="items-list">
+                            {% for post in posts %}
+                            <div class="item-card">
+                                <div class="item-image">
+                                    <img src="{{ post.image }}" alt="{{ post.title }}">
+                                </div>
+                                <div class="item-details">
+                                    <h3>{{ post.title }}</h3>
+                                    <p>{{ post.preview[:100] }}{% if post.preview|length > 100 %}...{% endif %}</p>
+                                    <div class="item-actions">
+                                        <a href="{{ url_for('admin_edit_blog', id=post.id) }}" class="btn btn-small">Edit</a>
+                                        <a href="{{ url_for('admin_delete_blog', id=post.id) }}" class="btn btn-small btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional panels for experience, education, and achievements would follow the same pattern -->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Menu switching
+    const menuLinks = document.querySelectorAll('.admin-menu-link');
+    const panels = document.querySelectorAll('.admin-panel');
+    
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Update active menu item
+            menuLinks.forEach(item => item.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Show corresponding panel
+            const targetSection = this.getAttribute('data-section');
+            panels.forEach(panel => panel.classList.remove('active'));
+            document.getElementById(targetSection).classList.add('active');
+        });
+    });
+    
+    // Form toggle
+    const addButtons = document.querySelectorAll('.add-new');
+    const cancelButtons = document.querySelectorAll('.cancel-form');
+    
+    addButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const formId = this.getAttribute('data-form');
+            document.getElementById(formId).style.display = 'block';
+            this.style.display = 'none';
+        });
+    });
+    
+    cancelButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const form = this.closest('.admin-form');
+            form.style.display = 'none';
+            form.closest('.panel-content').querySelector('.add-new').style.display = 'inline-block';
+        });
+    });
+});
+</script>
+{% endblock %}

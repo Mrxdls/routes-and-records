@@ -1,0 +1,55 @@
+{
+    "hero": {
+        "name": "Mridul Soni",
+        "title": "Computer Science Student & Developer",
+        "buttons": [
+            { "text": "View Projects", "link": "/projects", "class": "btn-primary" },
+            { "text": "Get in Touch", "link": "/contact", "class": "btn-secondary" }
+        ]
+    },
+    "about": {
+        "image": "/images/profile.jpg",
+        "description": [
+            "Hello! I'm Mridul, a Computer Science student with a focus on AI at Poornima College of Engineering. My passion lies in developing innovative solutions using cutting-edge technologies.",
+            "I have experience with cloud services, backend development, and data science. As a former intern at RegEx Software Services, I've worked on AWS solutions and implemented static web hosting with S3 and CloudFront."
+        ],
+        "skills": ["Python", "AWS", "SQL", "Flask", "FastAPI", "Data Science", "Machine Learning", "Linux"],
+        "experience": [
+            {
+                "company": "RegEx Software Services",
+                "position": "Intern",
+                "duration": "July 2024 - Aug 2024",
+                "details": "Worked on cloud solutions using AWS services like EC2, S3, and Lambda. Implemented static web hosting with S3 and CloudFront for fast, secure, and globally distributed content delivery."
+            }
+        ],
+        "education": [
+            {
+                "institution": "Poornima College of Engineering",
+                "degree": "Bachelor of Technology in Computer Science and Engg. (AI)",
+                "graduation": "Expected May 2026",
+                "cgpa": "7.00/10.00"
+            }
+        ],
+        "achievements": [
+            "NPTEL Elite rank in the Joy of Computing Using Python",
+            "Secured 2nd Position in Intra College Tech-fest AADHAR"
+        ]
+    },
+    
+    "cta": {
+        "heading": "Interested in working together?",
+        "text": "Let's connect and discuss how we can collaborate on your next project.",
+        "button": { "text": "Get in Touch", "link": "/contact", "class": "btn-primary" }
+    },
+    "contact": {
+        "email": "mriduls512@gmail.com",
+        "phone": "+91 9511581943",
+        "location": "Jaipur, Rajasthan, India",
+        "social": {
+            "github": "https://github.com/Mrxdls",
+            "linkedin": "https://linkedin.com/in/mridulsoni",
+            "twitter": "https://x.com/ButterDnToast",
+            "instagram": "https://instagram.com/mridul_.0s"
+        }
+    }
+}

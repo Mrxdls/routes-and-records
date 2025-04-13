@@ -1,0 +1,46 @@
+<!-- templates/blog.html -->
+{% extends 'base.html' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Blog</h1>
+        <p>Thoughts, tutorials, and insights on technology and development</p>
+    </div>
+</section>
+
+<section class="blog-posts">
+    <div class="container">
+        <div class="posts-grid">
+            {% for post in posts %}
+            <div class="blog-post">
+                <div class="post-image">
+                    <img src="{{ url_for('static', filename=post.image) }}" alt="{{ post.title }}">
+                </div>
+                <div class="post-content">
+                    <div class="post-date">{{ post.date }}</div>
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.preview }}</p>
+                    <a href="{{ post.link }}" class="read-more" target="_blank">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="subscribe">
+    <div class="container">
+        <div class="subscribe-content">
+            <h2>Subscribe to My Newsletter</h2>
+            <p>Get the latest articles and news delivered to your inbox</p>
+            <form class="subscribe-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+[
+    {
+        "title": "SmartTask Backend API",
+        "description": "Task Management API with secure user authentication and CRUD operations, built with Flask, PostgreSQL, SQLalchemy, Redis, and Celery.",
+        "image": "images/task.jpg",
+        "link": "https://github.com/Mrxdls/Task-management-api",
+        "tech": ["Flask", "PostgreSQL", "SQLalchemy", "Redis", "Celery"]
+    },
+    {
+        "title": "Attendance Analysis System",
+        "description": "Python-based application to analyze student engagement in classes using data science techniques and an interactive web interface.",
+        "image": "images/attendance.jpg",
+        "link": "https://github.com/Mrxdls/NexusIQ-Attendance-analysis-",
+        "tech": ["Python", "Flask", "Data Science", "Exploratory Data Analysis"]
+    },
+    {
+        "title": "Cloud Solutions with AWS",
+        "description": "Implemented cloud solutions using AWS services like EC2, S3, and Lambda for smooth and reliable application deployment.",
+        "image": "images/aws.jpg",
+        "link": "https://github.com/Mrxdls/Blog-Website",
+        "tech": ["AWS", "EC2", "S3", "CloudFront"]
+    }
+]
